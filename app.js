@@ -23,8 +23,16 @@ app.get('/restaurants/:id', (req, res) => {
   const restaurantObject = restauramtData.results.find(item => {
     if (item.id.toString() === id) { return item }
   })
-
   res.render('show', { restaurantObject })
+})
+
+//建立搜尋頁面路由
+app.get('/search', (req, res) => {
+  const searchKeyWord = req.query.keyword
+  const searchObject = restauramtData.results.filter(item => {
+    if (item.name.toLowerCase().includes(searchKeyWord.toLocaleLowerCase())) { return item }
+  })
+  res.render('index', { restaurant: searchObject })
 })
 
 app.listen(port, () => {
