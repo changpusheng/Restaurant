@@ -30,10 +30,17 @@
         {{item.phone}}
       </p>
 
-      <p class="mb-5">
+      <p class="mb-1">
         {{item.description}}
       </p>
-
+      <div style="text-align: end;">
+        <a href="/restaurants/{{item._id}}/edit" class="btn btn-outline-secondary btn-m">
+          編輯
+        </a>
+        <a href="/" class="btn btn-outline-secondary btn-m">
+          返回
+        </a>
+      </div>
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{item.image}}" alt="{{item.name}}"
         style="max-width: 600px;">
     </div>

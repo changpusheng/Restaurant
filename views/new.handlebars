@@ -1,0 +1,39 @@
+<h2 class="text-secondary text-center">新增餐館清單</h2>
+
+<form action="/new" method="POST">
+  <div class="input-group-lg mb-3">
+    <input type="text" name="name" id="name" placeholder="輸入店名" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="name_en" id="name_en" placeholder="輸入店名縮寫" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="category" id="category" placeholder="輸入餐廳主題" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="image" id="image"
+      placeholder="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg"
+      class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="location" id="location" placeholder="輸入餐廳位置" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="phone" id="phone" placeholder="輸入連絡電話" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" name="google_map" id="google_map" placeholder="https://goo.gl/maps/cUJEmFSRKyH2"
+      class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <input type="number" name="rating" id="rating" placeholder="輸入餐廳評價" class="input-group input-group-lg">
+  </div>
+  <div class="input-group mb-3">
+    <textarea class="input-group input-group-lg" rows="3" type="text" name="description" id="description"
+      placeholder="輸入餐館描述:">
+</textarea>
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-outline-secondary btn-m">送出</button>
+  </div>
+</form>
