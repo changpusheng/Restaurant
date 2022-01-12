@@ -42,9 +42,15 @@ app.get('/restaurants/:_id', (req, res) => {
 
 //建立搜尋頁面
 app.get('/search', (req, res) => {
-  const searchKeyWord = req.query.keyword
-  const reg = new RegExp(searchKeyWord, 'i')
-  restauramtData.find({ name: reg }).lean().then(item => res.render('index', { item }))
+  if (!req.query.keyword) {
+    res.redirect('/')
+  }
+  const searchKeyWordClear = req.query.keyword.trim().toLowerCase()
+  restauramtData.find({}).lean().then(item => {
+    const itemFilter = item.filter(data => data.name.toLowerCase().includes(searchKeyWordClear) ||
+      data.category.toLowerCase().includes(searchKeyWordClear))
+    res.render('index', { item: itemFilter })
+  })
     .catch(error => console.log('error:' + error))
 })
 

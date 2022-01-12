@@ -1,0 +1,33 @@
+form.was-validated input:invalid{
+    border : 2px solid red;
+  }
+form.was-validated input:valid{
+    border:2px solid blue;
+  }
+
+form.was-validated textarea:invalid{
+    border : 2px solid red;
+  }
+form.was-validated textarea:valid{
+    border:2px solid blue;
+  }
+
+  .invalid-feedback, .valid-feedback{
+    display:none;
+    font-size:1em;
+  }
+
+  .invalid-feedback{
+    color:red;
+  }
+
+  form.was-validated .form-control:invalid ~ .invalid-feedback{
+    display: initial;
+  } 
+
+  /* 去除數字上下按鈕 */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  } 

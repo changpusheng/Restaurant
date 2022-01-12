@@ -1,44 +1,52 @@
-<form action="/restaurants/{{item._id}}/edit" method="POST">
-
+<form id="editForm" action="/restaurants/{{item._id}}/edit" method="POST" novalidate>
   <h1 class="mb-1 restaurant-show-title">
     {{item.name}}</h1>
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-10 mx-auto">
 
-        <p class="mb-1">
+        <div class="mb-3">
           <span class="text-secondary">
             <i class="fas fa-utensils pr-2"></i>
             類別：
           </span>
-          <input type="text" name="category" id="category" placeholder="category" value="{{item.category}}">
-        </p>
-
-        <p class="mb-1">
+          <input type="text" name="category" id="category" placeholder="category" class="form-control"
+            value="{{item.category}}" required>
+          <div class="invalid-feedback">必要欄位</div>
+        </div>
+        <div class="mb-3">
           <span class="text-secondary">
             <i class="fas fa-map-marker-alt pr-2"></i>
             地址：
           </span>
-          <input type="text" name="location" id="location" placeholder="location" value="{{item.location}}">
+          <input type="text" name="location" id="location" placeholder="location" class="form-control"
+            value="{{item.location}}" required>
           <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
             <i class="fas fa-location-arrow pr-2 fa-xs"></i>
           </a>
-        </p>
-
-        <p class="mb-1">
+          <div class="invalid-feedback">必要欄位</div>
+        </div>
+        <div class="mb-3">
           <span class="text-secondary">
             <i class="fas fa-mobile-alt pr-2"></i>
             電話：
           </span>
-          <input type="text" name="phone" id="phone" placeholder="phone" value="{{item.phone}}">
-        </p>
+          <input type="number" name="phone" id="phone" placeholder="請輸入數字" class="form-control" value="{{item.phone}}"
+            required>
+          <div class="invalid-feedback">必要欄位</div>
+        </div>
+        <div class="mb-3">
+          <span class="text-secondary">
+            <i class="fas fa-menorah"></i>
+            特色：
+          </span>
+          <textarea rows="2" cols="150" type="text" name="description" id="description" class="form-control"
+            required>{{item.description}}</textarea>
+          <div class="invalid-feedback">必要欄位</div>
+        </div>
 
-        <p class="mb-2">
-          <textarea class="form-control" rows="3" type="text" name="description" id="description">{{item.description}}
-            </textarea>
-        </p>
-        <div class="footer" style="text-align:end;">
-          <button type="submit" class="btn btn-outline-secondary btn-m">修改確認</button>
+        <div >
+          <button type="submit" class="btn btn-outline-secondary btn-m" id="editSubmit">修改確認</button>
           <a href="/" class="btn btn-outline-secondary btn-m">
             取消
           </a>
