@@ -1,4 +1,4 @@
-<form id="editForm" action="/restaurants/{{item._id}}/edit" method="POST" novalidate>
+<form class="editForm" action="/restaurants/{{item._id}}/edit" method="POST" novalidate>
   <h1 class="mb-1 restaurant-show-title">
     {{item.name}}</h1>
   <div class="container">
@@ -45,8 +45,8 @@
           <div class="invalid-feedback">必要欄位</div>
         </div>
 
-        <div >
-          <button type="submit" class="btn btn-outline-secondary btn-m" id="editSubmit">修改確認</button>
+        <div>
+          <button type="submit" class="btn btn-outline-secondary btn-m editSubmit">修改確認</button>
           <a href="/" class="btn btn-outline-secondary btn-m">
             取消
           </a>

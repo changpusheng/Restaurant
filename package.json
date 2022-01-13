@@ -1,7 +1,6 @@
 {
   "name": "restaurantproject",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "seed": "node models/seeds/restaurantSeeder.js",
@@ -16,7 +15,16 @@
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "method-override": "^3.0.0",
-    "mongoose": "^6.1.5",
+    "mongoose": "^6.1.6",
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/changpusheng/Restaurant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/changpusheng/Restaurant/issues"
+  },
+  "homepage": "https://github.com/changpusheng/Restaurant#readme",
+  "description": ""
 }
