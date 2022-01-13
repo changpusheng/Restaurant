@@ -45,11 +45,12 @@ app.get('/search', (req, res) => {
   if (!req.query.keyword) {
     res.redirect('/')
   }
+  const searchKeyWord = req.query.keyword
   const searchKeyWordClear = req.query.keyword.trim().toLowerCase()
   restauramtData.find({}).lean().then(item => {
     const itemFilter = item.filter(data => data.name.toLowerCase().includes(searchKeyWordClear) ||
       data.category.toLowerCase().includes(searchKeyWordClear))
-    res.render('index', { item: itemFilter })
+    res.render('index', { item: itemFilter, searchKeyWord })
   })
     .catch(error => console.log('error:' + error))
 })
