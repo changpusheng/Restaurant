@@ -44,7 +44,7 @@
               <a href="/restaurants/{{this._id}}/edit" class="btn btn-outline-secondary btn-sm">
                 編輯
               </a>
-              <form action="/restaurants/{{this._id}}/delete" method="POST" style="display:inline;">
+              <form action="/restaurants/{{this._id}}?_method=delete" method="POST" style="display:inline;">
                 <button type="submit" class="btn btn-outline-secondary btn-sm" onclick="return confirmDelete()">
                   下架
                 </button>

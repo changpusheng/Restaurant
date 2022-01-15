@@ -4,6 +4,8 @@ const port = 3000
 const { engine } = require('express-handlebars')
 const restauramtData = require('./models/restaurantMongoDB')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+const router = require('./routes')
 
 
 //資料庫連線
@@ -17,7 +19,8 @@ db.once('open', () => {
   console.log('mongoose connected!')
 })
 
-//靜態文件
+//靜態文件,中介插件(middleware)
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -25,72 +28,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.engine('handlebars', engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-//建立首頁
-app.get('/', (req, res) => {
-  const restaurant = restauramtData
-  restauramtData.find().lean().then(item => res.render('index', { item }))
-    .catch(error => console.log('error:' + error))
-})
-
-//建立個別詳細頁面
-app.get('/restaurants/:_id', (req, res) => {
-  const id = req.params._id
-  return restauramtData.findById(id).lean().then(item => {
-    res.render('show', { item })
-  }).catch(error => console.log('error:' + error))
-})
-
-//建立搜尋頁面
-app.get('/search', (req, res) => {
-  if (!req.query.keyword) {
-    res.redirect('/')
-  }
-  const searchKeyWord = req.query.keyword
-  const searchKeyWordClear = req.query.keyword.trim().toLowerCase()
-  restauramtData.find({}).lean().then(item => {
-    const itemFilter = item.filter(data => data.name.toLowerCase().includes(searchKeyWordClear) ||
-      data.category.toLowerCase().includes(searchKeyWordClear))
-    res.render('index', { item: itemFilter, searchKeyWord })
-  })
-    .catch(error => console.log('error:' + error))
-})
-
-//編輯頁面
-app.get('/restaurants/:_id/edit', (req, res) => {
-  const id = req.params._id
-  restauramtData.findById(id).lean().then(item => {
-    res.render('edit', { item })
-  })
-})
-
-app.post('/restaurants/:_id/edit', (req, res) => {
-  const id = req.params._id
-  const { category, location, phone, description } = req.body
-  restauramtData.findById(id).then(item => {
-    item.category = category
-    item.location = location
-    item.phone = phone
-    item.description = description
-    return item.save()
-  }).then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log('error:' + error))
-})
-
-//新增餐廳
-app.get('/new', (req, res) => {
-  res.render('new')
-})
-
-app.post('/new', (req, res) => {
-  return restauramtData.create(req.body).then(() => res.redirect('/')).catch(error => console.log('error:' + error))
-})
-
-//移除餐廳
-app.post('/restaurants/:_id/delete', (req, res) => {
-  const id = req.params._id
-  restauramtData.findById(id).then(item => item.remove()).then(() => res.redirect('/'))
-    .catch(error => console.log('error:' + error))
-})
+//首頁重構
+app.use(router)
 
 app.listen(port, () => {
   console.log(`This server is running on http://localhost:${port}.`)
