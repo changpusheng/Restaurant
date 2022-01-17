@@ -1,16 +1,25 @@
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
-    <div class="search-bar-inner">
+    <div class="d-flex justify-content-between search-bar-inner">
       <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
+          <h4 class="mb-2">尋找餐廳：</h4>
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
             value="{{searchKeyWord}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
         </div>
+      </form>
+      <form action="/" class="form-group" method="POST" id="formSort">
+        <select name="sort" id="sort" class="btn btn btn-m" onchange="this.form.submit()">
+          <option value="0" {{selected sortOption 0 }}>排序</option>
+          <option value="1" {{selected sortOption 1}}>A -> Z</option>
+          <option value="2" {{selected sortOption 2 }}>Z -> A</option>
+          <option value="3" {{selected sortOption 3 }}>類別</option>
+          <option value="4" {{selected sortOption 4 }}>地區</option>
+        </select>
       </form>
     </div>
   </div>

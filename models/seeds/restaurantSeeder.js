@@ -1,9 +1,7 @@
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/restaurant-list')
 const restaurantForJson = require('../restaurant.json')
 const Restaurant = require('../restaurantMongoDB')
 
-const db = mongoose.connection
+const db = require('../../config/mongoose')
 
 db.on('error', () => { console.log('mongoose error!') })
 

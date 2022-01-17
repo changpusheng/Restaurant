@@ -1,10 +1,11 @@
 const express = require('express')
+const tr = require('transliteration')
 const router = express.Router()
 const restauramtData = require('../../models/restaurantMongoDB')
 
+
 //建立首頁
 router.get('/', (req, res) => {
-  const restaurant = restauramtData
   restauramtData.find().lean().then(item => res.render('index', { item }))
     .catch(error => console.log('error:' + error))
 })
@@ -15,7 +16,8 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  return restauramtData.create(req.body).then(() => res.redirect('/')).catch(error => console.log('error:' + error))
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+  restauramtData.create({ name, name_en, category, image, location, phone, google_map, rating, description }).then(() => res.redirect('/')).catch(error => console.log('error:' + error))
 })
 
 //建立搜尋頁面
@@ -26,15 +28,30 @@ router.get('/search', (req, res) => {
   const searchKeyWord = req.query.keyword
   const searchKeyWordClear = req.query.keyword.trim().toLowerCase()
   const reg = RegExp(searchKeyWord, 'i')
-  //第二種利用資料庫mongodb語法去做篩選，$and、$or
+  //利用資料庫mongodb語法去做篩選，$and、$or
   restauramtData.find({ $or: [{ name: reg }, { category: reg }] }).lean().then(item => {
     res.render('index', { item, searchKeyWord })
   }).catch(error => console.log('error:' + error))
+})
 
-  //第一種方法全部資料去做篩選
-  // const itemFilter = item.filter(data => data.name.toLowerCase().includes(searchKeyWordClear) ||
-  //   data.category.toLowerCase().includes(searchKeyWordClear))
-  // res.render('index', { item: itemFilter, searchKeyWord })
+router.post('/', (req, res) => {
+  const sortOption = req.body.sort
+  let sortObject
+  switch (sortOption) {
+    case '1': sortObject = { name: 'asc' }
+      break;
+    case '2': sortObject = { name: 'desc' }
+      break;
+    case '3': sortObject = { category: 'desc' }
+      break;
+    case '4': sortObject = { location: 'desc' }
+      break;
+    default:
+      sortObject = { _id: 'asc' }
+  }
+  restauramtData.find().sort(sortObject).lean().then(item => res.render('index', {
+    item, sortOption
+  })).catch(error => console.log('error:' + error))
 })
 
 module.exports = router

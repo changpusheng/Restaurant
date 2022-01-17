@@ -22,7 +22,7 @@ header {
 
 .search-bar .search-bar-outer {
   margin: 0 auto;
-  max-width: 680px;
+  max-width: 920px;
   background-color: #fce2cf;
   border-radius: 8px;
   padding: 20px 30px;
@@ -72,4 +72,9 @@ header {
   .restaurant-show-title {
     font-size: 2rem;
   }
+}
+
+#sort {
+  background-color: #9b4b4b;
+  color: #FFFFFF ;
 }

@@ -19,9 +19,6 @@ form.addEventListener('submit', function onFormEvent(event) {
   if (!form.checkValidity()) {
     event.stopPropagation()
     event.preventDefault()
-    alert("請再確認是否有空欄位!!")
+    alert("請確認是否有空欄位!!")
   }
 })
-
-
-
