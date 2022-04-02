@@ -1,5 +1,4 @@
 const express = require('express')
-const tr = require('transliteration')
 const router = express.Router()
 const restauramtData = require('../../models/restaurantMongoDB')
 

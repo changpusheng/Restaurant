@@ -1,11 +1,25 @@
 const express = require('express')
 const app = express()
-const port = 3000
 const { engine } = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const router = require('./routes')
+const session = require('express-session')
+const usePassport = require('./config/passport')
 
+//部屬到線上NODE.ENV會被設定為production
+if (process.env.NODE.ENV !== 'production') {
+  require('dotenv').config()
+}
+
+const port = process.env.Port
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
+usePassport(app)
 //引入mongoose on config
 require('./config/mongoose')
 

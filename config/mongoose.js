@@ -1,6 +1,11 @@
 //資料庫連線
+if (process.env.NODE.ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/restaurant-list')
+const mongodbURI = process.env.restaurantDB_URI
+mongoose.connect(mongodbURI)
 
 const db = mongoose.connection
 
