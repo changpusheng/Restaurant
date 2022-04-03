@@ -7,7 +7,7 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
   //2.選擇使用的策略
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (email, password, done) => {
     userDB.findOne({ email }).then(user => {
       if (!user) {
         return done(null, false, { message: '帳號為註冊' })

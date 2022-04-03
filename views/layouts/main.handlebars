@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="/stylesheets/index.css">
   <link rel="stylesheet" href="/stylesheets/show.css">
   <link rel="stylesheet" href="/stylesheets/formCheck.css">
-  <title>Restaurant List</title>
+  <title>
+    Restaurant List</title>
 </head>
 
 
@@ -22,12 +23,19 @@
       <a class="navbar-brand" href="/">
         <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
           width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
-        我的餐廳清單
+        {{#if isAuthenticated}}
+        {{user.name}}'s{{/if}}
+        餐廳清單
       </a>
-      <a href="/new" class="btn btn-outline-secondary btn-m">
-        <i class="fas fa-cart-plus"></i>
-        新增餐廳
-      </a>
+      <div>
+        {{#if isAuthenticated}}
+        <a href="/user/logout" class="btn btn-outline-secondary btn-m"> 登出</a>
+        {{/if}}
+        <a href="/new" class="btn btn-outline-secondary btn-m">
+          <i class="fas fa-cart-plus"></i>
+          新增餐廳
+        </a>
+      </div>
     </div>
   </nav>
 

@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const router = require('./routes')
 const session = require('express-session')
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 
 //部屬到線上NODE.ENV會被設定為production
 if (process.env.NODE.ENV !== 'production') {
@@ -19,16 +20,23 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+app.use(flash())
 usePassport(app)
-//引入mongoose on config
 require('./config/mongoose')
 
-//靜態文件,中介插件(middleware)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  next()
+})
+
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-//npm express-handlebars 插件格式
+
 //使用express-handlebar helpers 
 app.engine('handlebars', engine({
   defaultLayout: 'main',

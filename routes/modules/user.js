@@ -19,7 +19,6 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   userDB.findOne({ email }).then(item => {
     if (item) {
-      console.log('已存在用戶')
       res.render('/register', {
         name,
         email,
@@ -39,6 +38,7 @@ router.post('/register', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '登出成功!')
   res.redirect('/user/login')
 })
 
