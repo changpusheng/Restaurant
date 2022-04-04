@@ -20,6 +20,27 @@ Restaurant List <br>
     <li>
     "nodemon": "^2.0.15"
 </li>
+   <li>
+    "bcryptjs": "^2.4.3"
+</li>
+  <li>
+    "connect-flash": "^0.1.1"
+</li>
+ <li>
+   "dotenv": "^16.0.0"
+</li>
+<li>
+  "express-session": "^1.17.2"
+</li>
+<li>
+  "passport": "^0.4.1"
+</li>
+<li>
+   "passport-facebook": "^3.0.0"
+</li>
+<li>
+   "passport-local": "^1.0.0"
+</li>
  <li>
 資料庫使用:mongodb
     </li>
@@ -37,7 +58,10 @@ $git cd  Restaurant/
 $npm init -y
 </li>
 <li>
-$npm install express express-handlebars nodemon mongoose
+$npm run allnpm
+</li>
+<li>
+依照資料夾內文件.env.example 建立.env 檔 => /RESTAURANT/.env
 </li>
 <li>
 $npm run seed
