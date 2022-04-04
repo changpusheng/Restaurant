@@ -72,7 +72,14 @@ mongoose connected!
 <li>
 增加排序的功能
 </li>
+<li>
+FB登入驗證系統
+</li>
+<li>
+使用者專屬頁面
+</li>
 </ul>
+
 
 修改部分:
 <ul>

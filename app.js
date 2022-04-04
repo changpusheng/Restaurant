@@ -8,6 +8,7 @@ const session = require('express-session')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 
+
 //部屬到線上NODE.ENV會被設定為production
 if (process.env.NODE.ENV !== 'production') {
   require('dotenv').config()
@@ -16,7 +17,7 @@ if (process.env.NODE.ENV !== 'production') {
 const port = process.env.Port
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.Session_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.error = req.flash('error')
   next()
 })
 
